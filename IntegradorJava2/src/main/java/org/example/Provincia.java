@@ -4,9 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-//@AllArgsConstructor
 @NoArgsConstructor
-//@Builder
 public class Provincia {
     private String nombre;
     //asociaciones
