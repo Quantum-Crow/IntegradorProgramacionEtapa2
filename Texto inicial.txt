@@ -1,0 +1,1 @@
+hagan una rama para cada una de sus versiones, despues vamos a crear un Main para unificar todo con los errores ya arreglados
