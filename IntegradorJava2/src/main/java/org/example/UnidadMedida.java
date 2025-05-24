@@ -1,30 +1,15 @@
 package org.example;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class UnidadMedida {
+@SuperBuilder
+@ToString
+public class UnidadMedida extends Base{
     private String denominacion;
 
-    public UnidadMedida(String denominacion) {
-        this.denominacion = denominacion;
-    }
-
-    public String getDenominacion() {
-        return denominacion;
-    }
-
-    public void setDenominacion(String denominacion) {
-        this.denominacion = denominacion;
-    }
-
-    @Override
-    public String toString() {
-        return "UnidadMedida{" +
-                "denominacion='" + denominacion + '\'' +
-                '}';
-    }
 }

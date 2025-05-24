@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalTime;
 import java.util.HashSet;
@@ -8,8 +9,9 @@ import java.util.HashSet;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Sucursal {
+@SuperBuilder
+@ToString
+public class Sucursal extends Base{
     private String nombre;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
@@ -19,12 +21,6 @@ public class Sucursal {
     private HashSet<Categoria> categoria;
     private HashSet<Promocion> promocion;
 
-    public Sucursal(String nombre, LocalTime horarioApertura, LocalTime horarioCierre, Domicilio domicilio) {
-        this.nombre = nombre;
-        this.horarioApertura = horarioApertura;
-        this.horarioCierre = horarioCierre;
-        this.domicilio = domicilio;
-    }
 
     public void addPromocion(Promocion promocion) {
         if (this.promocion == null) {
@@ -52,15 +48,4 @@ public class Sucursal {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Sucursal{" +
-                "nombre='" + nombre + '\'' +
-                ", horarioApertura=" + horarioApertura +
-                ", horarioCierre=" + horarioCierre +
-                ", domicilio=" + domicilio +
-                ", categoria=" + categoria +
-                ", promocion=" + promocion +
-                '}';
-    }
 }

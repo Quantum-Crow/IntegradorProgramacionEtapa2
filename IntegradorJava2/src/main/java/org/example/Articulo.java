@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 
@@ -8,22 +9,26 @@ import java.util.HashSet;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public abstract class Articulo {
+@SuperBuilder
+@ToString
+public abstract class Articulo extends Base {
     protected String denominacion;
     protected double precioVenta;
 
     protected UnidadMedida unidadMedida;
     protected HashSet<Imagen1> Imagen;
 
-    public Articulo(String denominacion, double precioVenta) {
-        this.denominacion = denominacion;
-        this.precioVenta = precioVenta;
+    public void addImagenArticulo(Imagen1 imagenComida) {
+        if (Imagen == null) {
+            Imagen = new HashSet<>();
+        }
+        this.Imagen.add(imagenComida);
     }
 
-    public Articulo(String denominacion, double precioVenta, UnidadMedida unidadMedida) {
-        this.denominacion = denominacion;
-        this.precioVenta = precioVenta;
-        this.unidadMedida = unidadMedida;
+    public void removeImagenArticulo(Imagen1 imagenComida) {
+        if (Imagen != null) {
+            this.Imagen.remove(imagenComida);
+        }
     }
+
 }

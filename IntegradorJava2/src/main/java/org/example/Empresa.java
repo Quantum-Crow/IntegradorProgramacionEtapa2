@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,18 +9,13 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Empresa {
+@SuperBuilder
+@ToString
+public class Empresa extends Base {
     private String nombre, razonSocial;
     private Integer cuil;
 
     private Set<Sucursal> sucursales;
-
-    public Empresa(String nombre, String razonSocial, Integer cuil) {
-        this.nombre = nombre;
-        this.razonSocial = razonSocial;
-        this.cuil = cuil;
-    }
 
     public void addSucursal(Sucursal sucursal){
         if(this.sucursales == null) {
@@ -33,47 +29,4 @@ public class Empresa {
             this.sucursales.remove(sucursal);
         }
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getRazonSocial() {
-        return razonSocial;
-    }
-
-    public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
-
-    public Integer getCuil() {
-        return cuil;
-    }
-
-    public void setCuil(Integer cuil) {
-        this.cuil = cuil;
-    }
-
-    public HashSet<Sucursal> getSucursales() {
-        return (HashSet<Sucursal>) sucursales;
-    }
-
-    public void setSucursales(HashSet<Sucursal> sucursales) {
-        this.sucursales = sucursales;
-    }
-    @Override
-    public String toString() {
-        return "Empresa{" +
-                "nombre='" + nombre + '\'' +
-                ", razonSocial='" + razonSocial + '\'' +
-                ", cuil=" + cuil +
-                ", sucursales=" + sucursales +
-                '}';
-    }
-
-
 }

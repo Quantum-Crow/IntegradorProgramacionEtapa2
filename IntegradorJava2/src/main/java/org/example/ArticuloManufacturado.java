@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,16 +9,13 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ArticuloManufacturado {
+@SuperBuilder
+@ToString
+public class ArticuloManufacturado extends Base {
     private String descripcion, preparacion;
     private Integer tiempoEstimadoMinutos;
     private Set<ArticuloManufacturadoDetalle> ArtManDet;
 
-    public ArticuloManufacturado(String denominacion, double precioVenta, UnidadMedida unidadMedida, String descripcion) {
-        super();
-        this.descripcion = descripcion;
-    }
     public void addDetalle(ArticuloManufacturadoDetalle det) {
         if (this.ArtManDet == null) {
             this.ArtManDet = new HashSet<ArticuloManufacturadoDetalle>();

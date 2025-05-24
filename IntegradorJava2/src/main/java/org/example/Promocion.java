@@ -1,6 +1,7 @@
 package org.example;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,8 +10,9 @@ import java.util.HashSet;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Promocion {
+@SuperBuilder
+@ToString
+public class Promocion extends Base {
     private String denominacion;
     private LocalDate fechaDesde;
     private LocalDate fechaHasta;
@@ -23,21 +25,6 @@ public class Promocion {
     private HashSet<Imagen1> imagenes ;
     private HashSet<Articulo> articulos;
 
-    public Promocion(String denominacion, LocalDate fechaDesde, LocalDate fechaHasta, LocalTime horaHasta, LocalTime horaDesde, String descripcionDescuento, Double precioPromocional, TipoPromocion tipoPromocion) {
-        this.denominacion = denominacion;
-        this.fechaDesde = fechaDesde;
-        this.fechaHasta = fechaHasta;
-        this.horaHasta = horaHasta;
-        this.horaDesde = horaDesde;
-        this.descripcionDescuento = descripcionDescuento;
-        this.precioPromocional = precioPromocional;
-        this.tipoPromocion = tipoPromocion;
-    }
-
-
-    public void setTipoPromocion(TipoPromocion tipoPromocion) {
-        this.tipoPromocion = tipoPromocion;
-    }
     public void addImagen(Imagen1 imagen) {
         if (imagenes == null) {
             imagenes = new HashSet<>();
@@ -54,20 +41,4 @@ public class Promocion {
         this.articulos.add(articulo);
     }
 
-
-    @Override
-    public String toString() {
-        return "Promocion{" +
-                "denominacion='" + denominacion + '\'' +
-                ", fechaDesde=" + fechaDesde +
-                ", fechaHasta=" + fechaHasta +
-                ", horaDesde=" + horaDesde +
-                ", horaHasta=" + horaHasta +
-                ", descripcionDescuento='" + descripcionDescuento + '\'' +
-                ", precioPromocional=" + precioPromocional +
-                ", tipoPromocion=" + tipoPromocion +
-                ", imagenes=" + imagenes +
-                ", articulos=" + articulos +
-                '}';
-    }
 }

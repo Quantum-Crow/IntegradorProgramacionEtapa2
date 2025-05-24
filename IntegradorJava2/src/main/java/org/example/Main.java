@@ -5,118 +5,338 @@ import java.time.LocalTime;
 
 public class Main {
     public static void main(String[] args) {
+
+        //Recordar poner la IDs eventualmente
+
         // 1) Países
-        org.example.Pais p1 = new org.example.Pais("Argentina");
-        org.example.Pais p2 = new org.example.Pais("Chile");
+        Pais p1 = Pais.builder()
+                .nombre ("Argentina")
+                .build();
+        Pais p2 = Pais.builder()
+                .nombre("Chile")
+                .build();
 
         // 2) Provincias
-        org.example.Provincia pr1 = new org.example.Provincia("Mendoza");
+        Provincia pr1 = Provincia.builder()
+                .nombre("Mendoza")
+                .build();
         pr1.setPais(p1);
-        org.example.Provincia pr2 = new org.example.Provincia("Valparaiso?");
+        Provincia pr2 = Provincia.builder()
+                .nombre("Valparaiso")
+                .build();
         pr2.setPais(p2);
 
         // 3) Localidades
-        org.example.Localidad l1 = new org.example.Localidad("Villa Nueva");
+        Localidad l1 = Localidad.builder()
+                .nombre("Villa Nueva")
+                .build();
         l1.setProvincia(pr1);
-        org.example.Localidad l2 = new org.example.Localidad("Que se yo, algun lugar de Chile");
+        Localidad l2 = Localidad.builder()
+                .nombre("Algun lugar de Chile")
+                .build();
         l2.setProvincia(pr2);
 
         // 4) Domicilios
-        org.example.Domicilio d1 = new org.example.Domicilio("Calle 1", 123, 1900);
+        Domicilio d1 = Domicilio.builder()
+                .calle("Calle 1")
+                .numero(123)
+                .cp(1900)
+                .build();
         d1.setLocalidad(l1);
-        org.example.Domicilio d2 = new org.example.Domicilio("Rua 2", 456, 13000);
+        Domicilio d2 = Domicilio.builder()
+                .calle("Rua 2")
+                .numero(456)
+                .cp(13000)
+                .build();
         d2.setLocalidad(l2);
 
-        // 5) Sucursales
-        org.example.Sucursal s1 = new org.example.Sucursal("Sucursal Centro",
-                LocalTime.of(9,0), LocalTime.of(18,0), d1);
-        org.example.Sucursal s2 = new org.example.Sucursal("Sucursal Norte",
-                LocalTime.of(10,0), LocalTime.of(20,0), d2);
 
-        // 6) Empresa
-        org.example.Empresa e1 = new org.example.Empresa("Foo S.A.", "Foo Sociedad Anónima", 201234567);
-        org.example.Empresa e2 = new org.example.Empresa("Bar Ltda.", "Bar Limitada", 301234568);
+        //5) Promociones
+        Promocion HappyHour = Promocion.builder()
+                .denominacion("Happy Hour")
+                .fechaDesde(LocalDate.now())
+                .fechaHasta(LocalDate.now().plusDays(7))
+                .horaDesde(LocalTime.of(17,0))
+                .horaHasta(LocalTime.of(3,0))
+                .descripcionDescuento("3 Gin tonic y un boleo en el-----. 50% off")
+                .precioPromocional(2300.0)
+                .tipoPromocion(TipoPromocion.happyHour)
+                .build();
+        Promocion Promo_1 = Promocion.builder()
+                .denominacion("Promo 1")
+                .fechaDesde(LocalDate.now())
+                .fechaHasta(LocalDate.now().plusDays(7))
+                .horaDesde(LocalTime.of(19,0))
+                .horaHasta(LocalTime.of(23,0))
+                .descripcionDescuento("2 pizza Mozzarella para llevar")
+                .precioPromocional(3900.0)
+                .tipoPromocion(TipoPromocion.promocion_1)
+                .build();
 
-        //7) Promociones
-        org.example.Promocion promo1 = new org.example.Promocion(
-                "Happy Hour", LocalDate.now(),
-                LocalDate.now().plusDays(7),
-                LocalTime.of(17,0), LocalTime.of(19,0),
-                "50% off", 100.0, org.example.TipoPromocion.happyHour
-        );
-        org.example.Promocion promo2 = new org.example.Promocion(
-                "Promo 1", LocalDate.now(),
-                LocalDate.now().plusDays(3),
-                LocalTime.of(12,0), LocalTime.of(14,0),
-                "30% off", 150.0, org.example.TipoPromocion.promocion_1
-        );
+        // 6) Sucursales
+        Sucursal s1 = Sucursal.builder()
+                .nombre("Scucursal Centro")
+                .horarioApertura(LocalTime.of(18,0))
+                .horarioCierre(LocalTime.of(3,0))
+                .build();
+        s1.setDomicilio(d1);
+        Sucursal s2 = Sucursal.builder()
+                .nombre("Scucursal Norte")
+                .horarioApertura(LocalTime.of(10,0))
+                .horarioCierre(LocalTime.of(23,0))
+                .build();
+        s2.setDomicilio(d2);
+
+        // 7) Empresa
+        Empresa e1 = Empresa.builder()
+                .nombre("Foo S.A.")
+                .razonSocial("Foo Sociedad Anonima")
+                .cuil(201234567)
+                .build();
+        Empresa e2 = Empresa.builder()
+                .nombre("Bar Ltda")
+                .razonSocial("Bar Limitada")
+                .cuil(301234568)
+                .build();
+
 
         //8) Imágenes
-        org.example.Imagen1 img1 = new org.example.Imagen1("Imagen 1");
-        org.example.Imagen2 img2 = new org.example.Imagen2("Imagen 2");
+        Imagen1 img1 = Imagen1.builder()
+                .denominacion("Imagen 1")
+                .build();
+        Imagen2 img2 = Imagen2.builder()
+                .denominacion("Imagen 2")
+                .build();
+
 
         // 9) Categorías
-        org.example.Categoria cat1 = new org.example.Categoria("Pizzeria");
-        org.example.Categoria cat2 = new org.example.Categoria("Panificados");
+        Categoria cat1 = Categoria.builder()
+                .denominacion("Pizzeria")
+                .build();
+        Categoria cat2 = Categoria.builder()
+                .denominacion("Panificados")
+                .build();
+        Categoria cat3 = Categoria.builder()
+                .denominacion("Bebidas")
+                .build();
 
         // 9.1) Subcategorias
-        org.example.Categoria subCat1 = new org.example.Categoria("Pizza Mozzarella");
-        org.example.Categoria subCat2 = new org.example.Categoria("Pizza 4 Quesos");
-        org.example.Categoria subCat3 = new org.example.Categoria("Galletas");
-        org.example.Categoria subCat4 = new org.example.Categoria("Bizcochos");
+        Categoria subCat1 = Categoria.builder()
+                .denominacion("Pizza Mozzarella")
+                .build();
+        Categoria subCat2 = Categoria.builder()
+                .denominacion("Pizza 4 Quesos")
+                .build();
+        Categoria subCat3 = Categoria.builder()
+                .denominacion("Galletas")
+                .build();
+        Categoria subCat4 = Categoria.builder()
+                .denominacion("Bizcochos")
+                .build();
+        Categoria subCat5 = Categoria.builder()
+                .denominacion("Gin tonic")
+                .build();
+        Categoria subCat6 = Categoria.builder()
+                .denominacion("Coca cola")
+                .build();
 
         // 9.2) Relacion padre e hijo
         cat1.addSubcategoria(subCat1);
         cat1.addSubcategoria(subCat2);
         cat2.addSubcategoria(subCat3);
         cat2.addSubcategoria(subCat4);
+        cat3.addSubcategoria(subCat5);
+        cat3.addSubcategoria(subCat6);
 
         // 10) Unidades de medida
-        org.example.UnidadMedida mililitros = new org.example.UnidadMedida("Mililitros");
-        org.example.UnidadMedida gramos = new org.example.UnidadMedida("Gramos");
-        org.example.UnidadMedida unidad = new org.example.UnidadMedida("Unidad");
+        UnidadMedida mililitros = UnidadMedida.builder()
+                .denominacion("Mililitros")
+                .build();
+        UnidadMedida gramos = UnidadMedida.builder()
+                .denominacion("Gramos")
+                .build();
+        UnidadMedida unidades = UnidadMedida.builder()
+                .denominacion("Unidad/es")
+                .build();
 
         //11) Insumos
-        org.example.ArticuloInsumo harina = new org.example.ArticuloInsumo("Harina 000", 49.99, gramos, 20.0);
-        org.example.ArticuloInsumo levadura = new org.example.ArticuloInsumo("Levadura", 9.99, gramos, 5.0);
+        ArticuloInsumo harina = ArticuloInsumo.builder()
+                .PrecioCompra(9374.0)
+                .unidadMedida(gramos)
+                .stockActual(10000)
+                .stockMaximo(30000)
+                .esParaElaborar(true)
+                .build();
+        ArticuloInsumo levadura = ArticuloInsumo.builder()
+                .PrecioCompra(11000)
+                .unidadMedida(gramos)
+                .stockActual(1000)
+                .stockMaximo(3000)
+                .esParaElaborar(true)
+                .build();
+        ArticuloInsumo queso = ArticuloInsumo.builder()
+                .PrecioCompra(27000)
+                .unidadMedida(gramos)
+                .stockActual(9000)
+                .stockMaximo(20000)
+                .esParaElaborar(true)
+                .build();
+        ArticuloInsumo salsa = ArticuloInsumo.builder()
+                .PrecioCompra(6000)
+                .unidadMedida(mililitros)
+                .stockActual(5000)
+                .stockMaximo(15000)
+                .esParaElaborar(true)
+                .build();
+        ArticuloInsumo CocaCola = ArticuloInsumo.builder()
+                .PrecioCompra(600)
+                .unidadMedida(unidades)
+                .precioVenta(1300)
+                .stockActual(13)
+                .stockMaximo(25)
+                .esParaElaborar(false)
+                .build();
+        ArticuloInsumo GinBombay = ArticuloInsumo.builder()
+                .PrecioCompra(60000)
+                .unidadMedida(unidades)
+                .stockActual(3)
+                .stockMaximo(10)
+                .esParaElaborar(true)
+                .build();
+        ArticuloInsumo TonicaSchweppes  = ArticuloInsumo.builder()
+                .PrecioCompra(1300)
+                .unidadMedida(unidades)
+                .precioVenta(2500)
+                .stockActual(13)
+                .stockMaximo(30)
+                .esParaElaborar(false)
+                .build();
 
-        //12) Manufacturados
-        org.example.ArticuloManufacturado am1 = new org.example.ArticuloManufacturado("Pizza Mozzarela", 15, unidad, "Pizza Mozzarella comun y corriente" );
-        org.example.ArticuloManufacturado am2 = new org.example.ArticuloManufacturado("Bizcocho", 20, unidad ,"Hornear");
+        //12)Detalle Manufacturado
+        ArticuloManufacturadoDetalle amd1 = ArticuloManufacturadoDetalle.builder()
+                .cantidad(330)
+                .articuloInsumo(harina)
+                .build();
+        ArticuloManufacturadoDetalle amd2= ArticuloManufacturadoDetalle.builder()
+                .cantidad(50)
+                .articuloInsumo(levadura)
+                .build();
+        ArticuloManufacturadoDetalle amd3 = ArticuloManufacturadoDetalle.builder()
+                .cantidad(250)
+                .articuloInsumo(queso)
+                .build();
+        ArticuloManufacturadoDetalle amd4 = ArticuloManufacturadoDetalle.builder()
+                .cantidad(150)
+                .articuloInsumo(salsa)
+                .build();
+        ArticuloManufacturadoDetalle amd5 = ArticuloManufacturadoDetalle.builder()
+                .cantidad(30)
+                .articuloInsumo(GinBombay)
+                .build();
+        ArticuloManufacturadoDetalle amd6 = ArticuloManufacturadoDetalle.builder()
+                .cantidad(1)
+                .articuloInsumo(TonicaSchweppes)
+                .build();
 
-        //13) Detalle Manufacturado
-        org.example.ArticuloManufacturadoDetalle amd1 = new org.example.ArticuloManufacturadoDetalle( 10, harina);
-        org.example.ArticuloManufacturadoDetalle amd2 = new org.example.ArticuloManufacturadoDetalle(5, harina);
 
-        //14) Clientes
-        org.example.Cliente cl1 = new org.example.Cliente("Ana", "García", "111-222", "ana@mail.com");
-        org.example.Cliente cl2 = new org.example.Cliente("Gerardo", "Buster", "333-444", "bruno@mail.br");
+        //13) Manufacturados
+        ArticuloManufacturado PizzaMozzarella = ArticuloManufacturado.builder()
+                .descripcion("Pizza Mozzarella")
+                .preparacion("Usemos las prepizzas que se hicieron en la tarde, metan la masa al horno y tirenle queso")
+                .tiempoEstimadoMinutos(20)
+                .build();
+        PizzaMozzarella.addDetalle(amd1);
+        PizzaMozzarella.addDetalle(amd2);
+        PizzaMozzarella.addDetalle(amd3);
+        PizzaMozzarella.addDetalle(amd4);
+        ArticuloManufacturado GinTonic = ArticuloManufacturado.builder()
+                .descripcion("Gin tonic")
+                .preparacion("Gin y tonica, mandenle como les parezca mejor")
+                .tiempoEstimadoMinutos(5)
+                .build();
+        GinTonic.addDetalle(amd5);
+        GinTonic.addDetalle(amd6);
 
-        //15) Usuarios
-        org.example.Usuario cliente1 = new org.example.Usuario("auth0|123", "ana_g", org.example.Rol.cliente);
-        org.example.Usuario cliente2 = new org.example.Usuario("auth0|456", "gerardo_b", org.example.Rol.cliente);
-        org.example.Usuario empleado1 = new org.example.Usuario("auth0|789", "bruno_s", org.example.Rol.empleado);
+        //14) Usuarios
+        Usuario cliente1 = Usuario.builder()
+                .auth0Id("auth0|123")
+                .username("Ana_G")
+                .rol(Rol.cliente)
+                .build();
+        Usuario cliente2 = Usuario.builder()
+                .auth0Id("auth0")
+                .username("GerarditoParaLosAmigos")
+                .rol(Rol.cliente)
+                .build();
+        Usuario empleado1 = Usuario.builder()
+                .auth0Id("auth0|789")
+                .username("BrunoCaja")
+                .rol(Rol.empleado)
+                .build();
+
+        //15) Clientes
+        Cliente cl1 = Cliente.builder()
+                .nombre("Ana")
+                .apellido("Garcia")
+                .telefono("2616126432")
+                .email("ana@mail.com")
+                .usuario(cliente1)
+                .build();
+        Cliente cl2 = Cliente.builder()
+                .nombre("Gerardo")
+                .apellido("Buster")
+                .telefono("2613614289")
+                .email("buster@mail.com")
+                .usuario(cliente2)
+                .build();
 
         //16) Detalles de pedidos
-        org.example.DetallePedido detallePedido1 = new org.example.DetallePedido(2, 8500.0, am1);
-        org.example.DetallePedido detallePedido2 = new org.example.DetallePedido(12, 4000, am2);
+        DetallePedido detallePedido1 = DetallePedido.builder()
+                .cantidad(2)
+                .subTotal(8500)
+                .articulo(PizzaMozzarella)
+                .build();
+        DetallePedido detallePedido2 = DetallePedido.builder()
+                .cantidad(4)
+                .subTotal(4800)
+                .articulo(GinTonic)
+                .build();
 
         //17) Pedidos
-        LocalTime horafin1 = LocalTime.of(04, 26);
-        LocalDate fechapedido1 = LocalDate.of(2025, 5, 23);
-        org.example.Pedido pedido1 = new org.example.Pedido(org.example.Estado.pendiente, org.example.TipoEnvio.TakeAway, org.example.FormaPago.MercadoPago, fechapedido1, s1, d1);
-        pedido1.addDetallePedido(detallePedido1);
-        pedido1.setHoraEstimadaFinalizacion(horafin1);
-
-        LocalTime horafin2 = LocalTime.of(04, 26);
-        LocalDate fechapedido2 = LocalDate.of(2025, 5, 23);
-        org.example.Pedido pedido2 = new org.example.Pedido(org.example.Estado.pendiente, org.example.TipoEnvio.delivery, org.example.FormaPago.efectivo, fechapedido2, s2, d2);
-        pedido2.addDetallePedido(detallePedido2);
-        pedido2.setHoraEstimadaFinalizacion(horafin2);
+        Pedido pedido1 = Pedido.builder()
+                .horaEstimadaFinalizacion(LocalTime.of(02, 26))
+                .total(8500.0)
+                .totalCosto(5300.0)
+                .estado(Estado.pendiente)
+                .tipoEnvio(TipoEnvio.delivery)
+                .formaPago(FormaPago.MercadoPago)
+                .fechaPedido(LocalDate.of(2025,5,23))
+                .sucursal(s1)
+                .domicilio(d1)
+                .build();
+        Pedido pedido2 = Pedido.builder()
+                .horaEstimadaFinalizacion(LocalTime.of(11,20))
+                .total(4800.0)
+                .totalCosto(2700.0)
+                .estado(Estado.entregado)
+                .tipoEnvio(TipoEnvio.TakeAway)
+                .formaPago(FormaPago.efectivo)
+                .fechaPedido(LocalDate.of(2025,5,23))
+                .sucursal(s2)
+                .domicilio(d2)
+                .build();
 
         //18) Facturas
-        org.example.Factura factura1 = new org.example.Factura(pedido1.getFechaPedido(),8500, org.example.FormaPago.MercadoPago);
-        org.example.Factura factura2 = new org.example.Factura(pedido2.getFechaPedido(), 4000,  org.example.FormaPago.efectivo);
+        Factura factura1 = Factura.builder()
+                .fechaFacturacion(LocalDate.of(2025,5,23))
+                .formaPago(FormaPago.MercadoPago)
+                .totalVenta(8500.0)
+                .build();
+        Factura factura2 = Factura.builder()
+                .fechaFacturacion(LocalDate.of(2025,5,23))
+                .formaPago(FormaPago.efectivo)
+                .totalVenta(4800.0)
+                .build();
 
         //Souts para que se ordene mejor
         System.out.println(p1);
@@ -131,17 +351,17 @@ public class Main {
         System.out.println(s2);
         System.out.println(e1);
         System.out.println(e2);
-        System.out.println(promo1);
-        System.out.println(promo2);
+        System.out.println(HappyHour);
+        System.out.println(Promo_1);
         System.out.println(img1);
         System.out.println(img2);
         System.out.println(mililitros);
         System.out.println(gramos);
-        System.out.println(unidad);
+        System.out.println(unidades);
         System.out.println(harina);
         System.out.println(levadura);
-        System.out.println(am1);
-        System.out.println(am2);
+        System.out.println(PizzaMozzarella);
+        System.out.println(GinTonic);
         System.out.println(amd1);
         System.out.println(amd2);
         System.out.println(cl1);
@@ -156,5 +376,4 @@ public class Main {
         System.out.println(factura1);
         System.out.println(factura2);
     }
-
 }
