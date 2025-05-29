@@ -58,7 +58,7 @@ public class Main {
                 .fechaHasta(LocalDate.now().plusDays(7))
                 .horaDesde(LocalTime.of(17,0))
                 .horaHasta(LocalTime.of(3,0))
-                .descripcionDescuento("3 Gin tonic y un boleo en el-----. 50% off")
+                .descripcionDescuento("3 Gin tonic, digamos, no se quien se pide eso. 50% off")
                 .precioPromocional(2300.0)
                 .tipoPromocion(TipoPromocion.happyHour)
                 .build();
